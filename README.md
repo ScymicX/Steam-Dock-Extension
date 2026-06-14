@@ -4,6 +4,8 @@
 
 A PowerToys Command Palette extension with two Dock experiences:
 
+Repository: <https://github.com/ScymicX/Steam-Dock-Extension>
+
 - **Steam Library**: a searchable alphabetical list of locally installed games.
 - **Online Steam Friends**: a live Dock band showing online friends and the game they are playing.
 

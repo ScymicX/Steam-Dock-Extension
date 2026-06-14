@@ -5,8 +5,9 @@
 - [x] Source, assets, scripts, privacy policy, security policy, and MIT license
 - [x] Build validation for x64 and ARM64
 - [x] Generated output, certificates, user settings, and IDE files ignored
-- [ ] Create the public GitHub repository and enable private security advisories
-- [ ] Replace the repository placeholders in Store and release metadata
+- [x] Create the public GitHub repository
+- [ ] Enable private security advisories in the GitHub repository settings
+- [x] Replace the repository placeholders in Store and release metadata
 - [x] Tag the exact reviewed commit as `v0.1.0`
 
 ## Microsoft Store
@@ -19,7 +20,7 @@
 - [ ] Rotate the Steam Web API key visible in development screenshots
 - [ ] Capture a fresh settings screenshot after deploying the secure-key build
 - [ ] Confirm consent for, or anonymize, friend names shown in Store screenshots
-- [ ] Publish the repository so the privacy policy has a public HTTPS URL
+- [x] Publish the repository so the privacy policy has a public HTTPS URL
 - [ ] Run `Publishing/Build-StorePackage.ps1`
 - [ ] Complete age ratings, properties, pricing/availability, and Store listing
 - [ ] Upload the generated `.msixbundle` and submit for certification

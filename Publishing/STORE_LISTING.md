@@ -40,5 +40,7 @@ Steam, PowerToys, Command Palette, Dock, games, game launcher, friends
 
 ## Support and privacy URLs
 
-Use the public GitHub URLs for `README.md`, `PRIVACY.md`, and `SECURITY.md` after
-the repository has been created.
+- Website: <https://github.com/ScymicX/Steam-Dock-Extension>
+- Support: <https://github.com/ScymicX/Steam-Dock-Extension/issues>
+- Privacy policy: <https://github.com/ScymicX/Steam-Dock-Extension/blob/main/PRIVACY.md>
+- Security policy: <https://github.com/ScymicX/Steam-Dock-Extension/blob/main/SECURITY.md>
