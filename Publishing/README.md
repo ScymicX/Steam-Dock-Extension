@@ -34,3 +34,11 @@ Windows SDK installed. It creates an unsigned x64/ARM64 `.msixbundle` under
 
 See `RELEASE_CHECKLIST.md` and `STORE_LISTING.md` for the remaining submission
 steps and prepared listing text.
+
+## WinGet installers
+
+`Build-WinGetInstallers.ps1` publishes unpackaged x64 and ARM64 builds and wraps
+them in per-user Inno Setup installers. The GitHub workflow
+`release-winget.yml` builds and attaches both installers to a versioned release.
+
+See `WINGET_SUBMISSION.md` for the first `wingetcreate` submission.

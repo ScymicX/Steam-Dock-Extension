@@ -24,6 +24,10 @@ jobs:
         shell: pwsh
         run: ./Publishing/Build-StorePackage.ps1
 
+      - name: Validate WinGet publish output
+        shell: pwsh
+        run: ./Publishing/Build-WinGetInstallers.ps1 -PublishOnly
+
       - name: Run local library diagnostics
         shell: pwsh
         run: dotnet run --project SteamDockExtension.Diagnostics --configuration Release

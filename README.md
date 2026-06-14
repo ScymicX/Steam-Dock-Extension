@@ -80,6 +80,10 @@ The unsigned x64/ARM64 bundle is written to `artifacts/store` for Partner
 Center. See [the release checklist](Publishing/RELEASE_CHECKLIST.md) for Store
 and WinGet publication.
 
+For independent WinGet publication, use the GitHub
+**Release WinGet installers** workflow and follow
+[the WinGet submission guide](Publishing/WINGET_SUBMISSION.md).
+
 ## Privacy and license
 
 Steam Dock Extension has no developer-owned server, analytics, or telemetry.

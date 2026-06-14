@@ -27,8 +27,11 @@
 
 ## WinGet
 
-- [ ] Publish a versioned installer or package as a permanent GitHub release asset
+- [x] Add reproducible x64 and ARM64 Inno Setup installer builds
+- [x] Add the GitHub release workflow
+- [ ] Run the release workflow and publish both installers as permanent assets
 - [ ] Generate and validate WinGet manifests with `wingetcreate`
+- [ ] Confirm the `windows-commandpalette-extension` tag is present
 - [ ] Submit the manifests to `microsoft/winget-pkgs`
 - [ ] Repeat the manifest update for every released version
 
