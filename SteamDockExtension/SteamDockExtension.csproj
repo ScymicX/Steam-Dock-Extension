@@ -1,0 +1,102 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SteamDockExtension</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\SteamDockExtension.ico</ApplicationIcon>
+
+    <WindowsSdkPackageVersion>10.0.26100.68-preview</WindowsSdkPackageVersion>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+
+    <PublishProfile>win-$(Platform).pubxml</PublishProfile>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <AppxPackageIdentityName>DennieZorg.SteamDockExtension</AppxPackageIdentityName>
+    <AppxPackagePublisher>CN=227F94E6-57BF-4474-9710-A6B8743341DF</AppxPackagePublisher>
+    <AppxPackageVersion>0.1.0.0</AppxPackageVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Authors>DennieZorg</Authors>
+    <Description>Steam library and online friends for the PowerToys Command Palette Dock.</Description>
+    <Copyright>Copyright (c) 2026 DennieZorg</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\**\*.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CommandPalette.Extensions" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" />
+    <PackageReference Include="Shmuelie.WinRTServer" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IsAotCompatible>true</IsAotCompatible>
+    <CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
+    <CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
+    <WarningsNotAsErrors>IL2081;$(WarningsNotAsErrors)</WarningsNotAsErrors>
+    <ILLinkTreatWarningsAsErrors>true</ILLinkTreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <PublishTrimmed>false</PublishTrimmed>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+    <EnableAotAnalyzer>true</EnableAotAnalyzer>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'!='Debug'">
+    <!-- The .NET 10 linker currently crashes while writing native PDBs for this
+         Windows SDK combination. Keep publishing deterministic until that is fixed. -->
+    <PublishTrimmed>false</PublishTrimmed>
+    <ILLinkTreatWarningsAsErrors>false</ILLinkTreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <Target Name="_PrepareForDeploy">
+    <Exec
+      Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Deploy.ps1&quot; -Prepare -PackageName &quot;$(AppxPackageIdentityName)&quot; -ProcessName &quot;SteamDockExtension&quot;" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="_PrepareForDeploy;Build">
+    <PropertyGroup>
+      <_DeployManifest>$(TargetDir)AppxManifest.xml</_DeployManifest>
+    </PropertyGroup>
+
+    <Error
+      Condition="!Exists('$(_DeployManifest)')"
+      Text="The generated AppxManifest.xml was not found at '$(_DeployManifest)'." />
+
+    <ItemGroup>
+      <_DeployAsset Include="$(MSBuildProjectDirectory)\Assets\**\*" />
+    </ItemGroup>
+
+    <Copy
+      SourceFiles="@(_DeployAsset)"
+      DestinationFiles="@(_DeployAsset->'$(TargetDir)Assets\%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
+
+    <Exec
+      Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Deploy.ps1&quot; -ManifestPath &quot;$(_DeployManifest)&quot;" />
+  </Target>
+</Project>

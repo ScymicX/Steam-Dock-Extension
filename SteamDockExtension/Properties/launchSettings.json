@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "SteamDockExtension (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    },
+    "SteamDockExtension (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\SteamDockExtension\Models\SteamGame.cs" Link="Models\SteamGame.cs" />
+    <Compile Include="..\SteamDockExtension\Services\VdfParser.cs" Link="Services\VdfParser.cs" />
+    <Compile Include="..\SteamDockExtension\Services\SteamInstallationLocator.cs" Link="Services\SteamInstallationLocator.cs" />
+    <Compile Include="..\SteamDockExtension\Services\SteamLibraryService.cs" Link="Services\SteamLibraryService.cs" />
+  </ItemGroup>
+</Project>
